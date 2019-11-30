@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>US Deaths and Medicare Spending</title>
+
+    <!-- Leaflet CSS & JS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
+    <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js" integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ==" crossorigin=""></script>
+
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!-- Leaflet-Choropleth JavaScript -->
+    <script type="text/javascript" src="static/js/choropleth.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+
+</head>
+
+<body>
+
+    <section class="container-fluid px-5 py-5">
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header bg-transparent">
+
+                        <h5 class="card-title">Number of deaths of natural causes by state </h5>
+                    </div>
+
+                    <div class="card-body text-justify pt-3 px-2">
+                        <select id="sel-year">
+                               
+                                    <option selected value="2017">2017</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2010">2010</option>
+                                  </select>
+                        <select id="sel-cause">
+                                       
+                                        <option selected value="All causes">All Causes</option>
+                                        <option value="Heart disease">Heart Disease</option>
+                                        <option value="Suicide">Suicide</option>
+                                        <option value="Unintentional injuries">Unintentional Injuries</option>
+                                        <option value="Stroke">Stroke</option>
+                                      </select>
+                        <div id="disease_map"></div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header bg-transparent">
+
+                        <h5 class="card-title">Medicare speding by state</h5>
+                    </div>
+
+                    <div class="card-body text-justify pt-3 px-2">
+                        <select id="sel-year-medicare">
+                                       
+                                            <option selected value="2014">2014</option>
+            
+                                            <option value="2010">2010</option>
+                                          </select>
+
+                        <div id="medicare_map"></div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header bg-transparent">
+
+                        <h5 class="card-title">Scatter plot </h5>
+                    </div>
+
+                    <div class="card-body text-justify pt-3 px-2">
+
+
+                        <canvas id="bubble-chart" width="400" height="200"></canvas>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header bg-transparent">
+
+                        <h5 class="card-title">Placeholder for Earthquake map</h5>
+                    </div>
+
+                    <div class="card-body text-justify pt-3 px-2">
+
+
+                        <div id="new_map"></div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--Chart JS-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- The div where we will inject our map -->
+
+
+    <script type="text/javascript" src="static/js/us-states.js"></script>
+    <script type="text/javascript" src="static/js/config.js"></script>
+    <script type="text/javascript" src="static/js/disease_medicare_logic.js"></script>
+    <script type="text/javascript" src="static/js/scatter_logic.js"></script>
+
+
+
+</body>
+
+</html>
