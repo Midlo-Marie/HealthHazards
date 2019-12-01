@@ -2,8 +2,16 @@
 // Creating map object
 var diseaseMap = L.map("disease_map", {
     center: [39.8283, -98.5795],
-
+    scrollWheelZoom: false,
     zoom: 3
+});
+
+diseaseMap.on('click', function() {
+    if (diseaseMap.scrollWheelZoom.enabled()) {
+        diseaseMap.scrollWheelZoom.disable();
+    } else {
+        diseaseMap.scrollWheelZoom.enable();
+    }
 });
 
 // Adding tile layer
@@ -154,8 +162,17 @@ d3.select("#sel-cause")
 // Creating map object
 var medicareMap = L.map("medicare_map", {
     center: [39.8283, -98.5795],
+    scrollWheelZoom: false,
 
     zoom: 3
+});
+
+medicareMap.on('click', function() {
+    if (medicareMap.scrollWheelZoom.enabled()) {
+        medicareMap.scrollWheelZoom.disable();
+    } else {
+        medicareMap.scrollWheelZoom.enable();
+    }
 });
 
 // Adding tile layer

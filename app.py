@@ -14,6 +14,7 @@ from flask_pymongo import PyMongo
 
 from bson.json_util import dumps
 import copy
+import requests 
 
 # Use PyMongo to establish Mongo connection
 
@@ -33,7 +34,6 @@ def dataDeaths():
     # Find one record of data from the mongo database
     print("Get maps data")
     maps_data = mongo.db.maps.find({ "type": "Feature" })
-    # maps_data = mongo.db.maps.aggregate([{ "$group": { "_id": None, "State": { "$first": "$State" } }}, { "$filter": { "_id": None, "State": { "$first": "$State" } }}])
     death_data = mongo.db.maps.find({"Cause Name": { "$exists": True }})
     merged_data = merge_geojson(maps_data, death_data, "State", ["Year", "Cause Name"])
     print("Got maps data")
@@ -50,7 +50,6 @@ def dataMedicare():
     # Find one record of data from the mongo database
     print("Get maps data")
     maps_data = mongo.db.maps.find({ "type": "Feature" })
-    # maps_data = mongo.db.maps.aggregate([{ "$group": { "_id": None, "State": { "$first": "$State" } }}, { "$filter": { "_id": None, "State": { "$first": "$State" } }}])
     medicare_data = mongo.db.maps.find({"normalized_medicare_spending": { "$exists": True }})
     merged_data = merge_geojson(maps_data, medicare_data, "State", ["Year"])
     print("Got maps data")
@@ -75,7 +74,30 @@ def chartMedicare():
  
     return dumps(medicare_data)
 
+# Route to render USGS Earthquake data using data from Mongo
+@app.route("/api/map/earthquake")
+def dataEarthquake():
 
+    # Find one record of data from the mongo database
+  
+    earthquake_data = mongo.db.earthquake.find_one()
+    print(earthquake_data)
+
+    return dumps(earthquake_data)
+
+
+# Route that will trigger the scrape function
+@app.route("/api/map/earthquake/refresh")
+def refresh():
+
+    # Run the scrape function
+    earthquake_data = requests.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").json()
+  
+    # Update the Mongo database using update and upsert=True
+    mongo.db.earthquake.update({}, earthquake_data, upsert=True)
+
+    # Redirect back to home page
+    return redirect("/api/map/earthquake", 302)
 
 def merge_geojson(left, right, key, col_suffix = [], exclude=""):
   """
@@ -106,3 +128,4 @@ def merge_geojson(left, right, key, col_suffix = [], exclude=""):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
