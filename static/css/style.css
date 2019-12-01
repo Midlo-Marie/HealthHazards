@@ -11,6 +11,10 @@ body {
     height: 400px;
 }
 
+#earthquake_map {
+    height: 600px;
+}
+
 body,
 html {
     height: 100%;
