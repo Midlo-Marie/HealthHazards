@@ -165,7 +165,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     return div;
   };
   // legend2.addTo(earthquakeMap)
-  // if( tsunami_sum != 0 ) legend2.addTo(map);
+    if( tsunami_sum != 0 ) legend2.addTo(map);
 
   // retreive Tectonic Plate geoJSON data.
   d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json",
