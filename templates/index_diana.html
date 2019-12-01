@@ -6,9 +6,15 @@
     <title>US Deaths and Medicare Spending</title>
 
     <!-- Leaflet CSS & JS-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
-    <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js" integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ==" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+    <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
+        integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
+        crossorigin=""></script>
 
     <!-- d3 JavaScript -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -17,7 +23,8 @@
     <script type="text/javascript" src="static/js/choropleth.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
@@ -26,32 +33,34 @@
 </head>
 
 <body>
-    <div class="jumbotron text-center" style="background-image: url('/static/img/EKG-bg.png'); height: 300px; background-position: center; background-size: 50% auto;
+    <div class="jumbotron text-center" style="background-image: url('/static/img/EKG-bg.png'); height: 400px; background-position: center; background-size: 75% auto;
         background-repeat: no-repeat; background-color: rgb(200,200,200); color: #ecd614f3">
         <!-- <div class="jumbotron text-center" style="height: 460px; background-position: center; background-size: 50% auto;
         background-repeat: no-repeat; background-color: rgb(200,200,200); color: #ecd614f3"> -->
-        <h1> <br><br> <b>Natural Causes or Natural Hazards?</b></h1>
+        <h1> <br><b>Natural Causes or Natural Hazards?</b></h1>
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index_diana.html">
                 <Strong>Home</Strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="navbar-nav navbar-right">
                 <!-- <div class="collapse navbar-collapse" id="collapsibleNavbar"> -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="https://www.usgs.gov/news/all-systems-go-first-statewide-testing-shakealert-united-states?qt-news_science_products=1#qt-news_science_products">ShakeAlert</a>
+                        <a class="nav-link text-white"
+                            href="https://www.usgs.gov/news/all-systems-go-first-statewide-testing-shakealert-united-states?qt-news_science_products=1#qt-news_science_products">ShakeAlert</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="https://ntwc.ncep.noaa.gov">TsunamiAlert</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  text-white" href="https://www.cdc.gov/disasters/earthquakes/index.html">HealthAlert</a>
+                        <a class="nav-link  text-white"
+                            href="https://www.cdc.gov/disasters/earthquakes/index.html">HealthAlert</a>
                     </li>
                 </ul>
             </div>
@@ -66,23 +75,28 @@
                 <div>
                     <img src="/static/img/WomenWhoCode.jpg" width="200" height="200" />
                 </div>
-                <p>Diana and Marie used their backgrounds in finance and environmental science to exercise new skills in data analytics and consider connections between the natural world and society.
+                <p>Diana and Marie used their backgrounds in finance and environmental science to exercise new skills in
+                    data analytics and consider connections between the natural world and society.
                 </p>
                 <h3>What's the point?</h3>
-                <p>Social, health, financial, and environmental data mashups. Thinking differently with data from different disciplines.
+                <p>Social, health, financial, and environmental data mashups. Thinking differently with data from
+                    different disciplines.
                 </p>
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.medicalnewstoday.com/articles/237093.php#1">Earthquakes and Health
-                  Impacts</a>
+                        <a class="nav-link" href="https://www.medicalnewstoday.com/articles/237093.php#1">Earthquakes
+                            and Health
+                            Impacts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.washingtonpost.com/health/theres-something-terribly-wrong-americans-are-dying-young-at-alarming-rates/2019/11/25/d88b28ec-0d6a-11ea-8397-a955cd542d00_story.html">
-                  New Look at Life and Death in America</a>
+                        <a class="nav-link"
+                            href="https://www.washingtonpost.com/health/theres-something-terribly-wrong-americans-are-dying-young-at-alarming-rates/2019/11/25/d88b28ec-0d6a-11ea-8397-a955cd542d00_story.html">
+                            New Look at Life and Death in America</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://issues.org/retrofitting-social-science/">The Fourth Purpose: Practical and
-                  Moral Analytics</a>
+                        <a class="nav-link" href="https://issues.org/retrofitting-social-science/">The Fourth Purpose:
+                            Practical and
+                            Moral Analytics</a>
                     </li>
                 </ul>
                 <hr class="d-sm-none">
@@ -91,13 +105,17 @@
                 <h2>Where do earthquakes and tsunamis occur?</h2>
                 <h5>Weekly distributions from US Geological Service</h5>
                 <p>Some text..</p>
-                <p>After the earthquake in Northridge, California, heart attacks rose by 35% in the week following the disaster, with increases also being reported in other areas, including Taiwan. However, in another earthquake, in Loma Pietra, California
+                <p>After the earthquake in Northridge, California, heart attacks rose by 35% in the week following the
+                    disaster, with increases also being reported in other areas, including Taiwan. However, in another
+                    earthquake, in Loma Pietra, California
                     in 1989 no increases were reported.
                     <h2>Where does heart disease occur most frequently?</h2>
                     <h5>Title description, Sep 2, 2017</h5>
                     <!-- <div class="fakeimg">Fake Image</div> -->
                     <p>Some text..</p>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco.
                     </p>
             </div>
         </div>
@@ -114,19 +132,19 @@
 
                     <div class="card-body text-justify pt-3 px-2">
                         <select id="sel-year">
-                               
-                                    <option selected value="2017">2017</option>
-                                    <option value="2014">2014</option>
-                                    <option value="2010">2010</option>
-                                  </select>
+
+                            <option selected value="2017">2017</option>
+                            <option value="2014">2014</option>
+                            <option value="2010">2010</option>
+                        </select>
                         <select id="sel-cause">
-                                       
-                                        <option selected value="All causes">All Causes</option>
-                                        <option value="Heart disease">Heart Disease</option>
-                                        <option value="Suicide">Suicide</option>
-                                        <option value="Unintentional injuries">Unintentional Injuries</option>
-                                        <option value="Stroke">Stroke</option>
-                                      </select>
+
+                            <option selected value="All causes">All Causes</option>
+                            <option value="Heart disease">Heart Disease</option>
+                            <option value="Suicide">Suicide</option>
+                            <option value="Unintentional injuries">Unintentional Injuries</option>
+                            <option value="Stroke">Stroke</option>
+                        </select>
                         <div id="disease_map"></div>
 
 
@@ -140,17 +158,17 @@
                 <div class="card mb-3">
                     <div class="card-header bg-transparent">
 
-                        <h5 class="card-title">Medicare speding by state</h5>
+                        <h5 class="card-title">Medicare spending by state</h5>
                     </div>
 
                     <div class="card-body text-justify pt-3 px-2">
                         <select id="sel-year-medicare">
-                                       
-                                            <option selected value="2014">2014</option>
-            
-                                            <option value="2010">2010</option>
-                                          </select>
 
+                            <option selected value="2014">2014</option>
+
+                            <option value="2010">2010</option>
+                        </select>
+ 
                         <div id="medicare_map"></div>
 
 
@@ -166,7 +184,7 @@
                 <div class="card mb-3">
                     <div class="card-header bg-transparent">
 
-                        <h5 class="card-title">Scatter plot </h5>
+                        <h5 class="card-title">Deaths v. Spending by State</h5>
                     </div>
 
                     <div class="card-body text-justify pt-3 px-2">
@@ -185,12 +203,13 @@
                 <div class="card mb-3">
                     <div class="card-header bg-transparent">
 
-                        <h5 class="card-title">Placeholder for Earthquake map</h5>
+                        <h5 class="card-title">Earthquake and Potential Tsunami locations</h5>
                     </div>
 
                     <div class="card-body text-justify pt-3 px-2">
 
-
+                        <p><a class="button btn-danger" href="/api/map/earthquake/refresh" role="button"> 
+                            Update</a></p>
                         <div id="earthquake_map"></div>
 
 
@@ -222,9 +241,15 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <!-- The div where we will inject our map -->
 
 
