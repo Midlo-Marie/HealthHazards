@@ -23,7 +23,9 @@
 
 > In this study, we conduct a preliminary investigation between risk and death
 > from natural hazards, specifically earthquakes and tsunamis, or natural causes
-> in the United States. We look at geographic distribution and medicare payments as a > financial proxy to show how different states may suffer non-uniformly from various > health hazards.
+> in the United States. We look at geographic distribution and medicare payments
+> as a financial proxy to show how different states may suffer non-uniformly
+> from various health hazards.
 
 ### Key Takeaways
 
