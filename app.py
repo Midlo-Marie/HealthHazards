@@ -25,7 +25,7 @@ mongo = PyMongo(app, uri="mongodb://localhost:27017/maps_db")
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def index():
-  return render_template("index_diana.html")
+  return render_template("index_final.html")
 
 # Route to render data for deaths by natural causes map using data from Mongo
 @app.route("/api/map/deaths")

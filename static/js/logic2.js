@@ -1,56 +1,66 @@
 // Selectable backgrounds of our map - tile layers:
 // grayscale background.
-var graymap_background = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?" +
-  "access_token=pk.eyJ1IjoibWFudWVsYW1hY2hhZG8iLCJhIjoiY2ppczQ0NzBtMWNydTNrdDl6Z2JhdzZidSJ9.BFD3qzgAC2kMoEZirGaDjA");
+function makethemap(data) {
+  var graymap_background = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?" +
+    "access_token=pk.eyJ1IjoibWFudWVsYW1hY2hhZG8iLCJhIjoiY2ppczQ0NzBtMWNydTNrdDl6Z2JhdzZidSJ9.BFD3qzgAC2kMoEZirGaDjA");
 
-// satellite background.
-var satellitemap_background = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?" +
-  "access_token=pk.eyJ1IjoibWFudWVsYW1hY2hhZG8iLCJhIjoiY2ppczQ0NzBtMWNydTNrdDl6Z2JhdzZidSJ9.BFD3qzgAC2kMoEZirGaDjA");
+  // satellite background.
+  var satellitemap_background = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?" +
+    "access_token=pk.eyJ1IjoibWFudWVsYW1hY2hhZG8iLCJhIjoiY2ppczQ0NzBtMWNydTNrdDl6Z2JhdzZidSJ9.BFD3qzgAC2kMoEZirGaDjA");
 
-// outdoors background.
-var outdoors_background = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?" +
-  "access_token=pk.eyJ1IjoibWFudWVsYW1hY2hhZG8iLCJhIjoiY2ppczQ0NzBtMWNydTNrdDl6Z2JhdzZidSJ9.BFD3qzgAC2kMoEZirGaDjA");
-// Add ocean bathymetry from Esri to show bottom topography
-var oceans = L.esri.basemapLayer("Oceans");
+  // outdoors background.
+  var outdoors_background = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?" +
+    "access_token=pk.eyJ1IjoibWFudWVsYW1hY2hhZG8iLCJhIjoiY2ppczQ0NzBtMWNydTNrdDl6Z2JhdzZidSJ9.BFD3qzgAC2kMoEZirGaDjA");
+  // Add ocean bathymetry from Esri to show bottom topography
+  var oceans = L.esri.basemapLayer("Oceans");
 
-// map object to an array of layers we created.
-// Geographic center of the United States is used to start
-var earthquakeMap = L.map("earthquake_map", {
-  center: [39.8283, -98.5795],
-  zoom: 3,
-  // layers: [graymap_background, satellitemap_background, outdoors_background]
-  layers: [graymap_background, satellitemap_background, outdoors_background]
-});
+  // map object to an array of layers we created.
+  // Geographic center of the United States is used to start
+  if (earthquakeMap) { earthquakeMap.remove() }
+  var earthquakeMap = L.map("earthquake_map", {
+    center: [39.8283, -98.5795],
+    zoom: 3,
+    scrollWheelZoom: false,
+    // layers: [graymap_background, satellitemap_background, outdoors_background]
+    layers: [graymap_background, satellitemap_background, outdoors_background]
+  });
+  earthquakeMap.on('click', function () {
+    if (earthquakeMap.scrollWheelZoom.enabled()) {
+      earthquakeMap.scrollWheelZoom.disable();
+    } else {
+      earthquakeMap.scrollWheelZoom.enable();
+    }
+  });
 
-// adding one 'graymap' tile layer to the map.
-graymap_background.addTo(earthquakeMap);
-// oceans.addTo(map);
-// layers for two different sets of data, earthquakes and tectonicplates.
-var tectonicplates = new L.LayerGroup();
-var earthquakes = new L.LayerGroup();
+  // adding one 'graymap' tile layer to the map.
+  oceans.addTo(earthquakeMap);
+  // oceans.addTo(map);
+  // layers for two different sets of data, earthquakes and tectonicplates.
+  var tectonicplates = new L.LayerGroup();
+  var earthquakes = new L.LayerGroup();
 
-// base layers
-var baseMaps = {
-  Satellite: satellitemap_background,
-  Grayscale: graymap_background,
-  LandOcean: oceans
-};
+  // base layers
+  var baseMaps = {
+    Satellite: satellitemap_background,
+    Grayscale: graymap_background,
+    LandOcean: oceans
+  };
 
-// overlays 
-var overlayMaps = {
-  "Tectonic Plates": tectonicplates,
-  "Earthquakes": earthquakes
-};
+  // overlays 
+  var overlayMaps = {
+    "Tectonic Plates": tectonicplates,
+    "Earthquakes": earthquakes
+  };
 
-// control which layers are visible.
-L.control
-  .layers(baseMaps, overlayMaps)
-  .addTo(earthquakeMap);
+  // control which layers are visible.
+  L.control
+    .layers(baseMaps, overlayMaps)
+    .addTo(earthquakeMap);
 
-// retrieve earthquake geoJSON data.
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson", function (data) {
+  // retrieve earthquake geoJSON data.
 
-  console.dir(data);
+
+  // console.dir(data);
   function styleInfo(feature) {
     return {
       opacity: 1,
@@ -118,12 +128,12 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   earthquakes.addTo(earthquakeMap);
 
   // Add legend using code from Leaflets website
-  var legend = L.control({
+  var legend_eq = L.control({
     position: "bottomright"
   });
 
 
-  legend.onAdd = function () {
+  legend_eq.onAdd = function () {
     var div = L
       .DomUtil
       .create("div", "info legend");
@@ -139,14 +149,14 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     ];
 
     for (var i = 0; i < grades.length; i++) {
-      div.innerHTML += " <i style='background: " + colors[i] + "'></i> " + "Mag " +
+      div.innerHTML += " <legend_eq i style='background: " + colors[i] + "'></i> " + "Mag " +
         grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
     }
     return div;
   };
 
 
-  legend.addTo(earthquakeMap);
+  legend_eq.addTo(earthquakeMap);
 
   // Add tsunami legend using code from Leaflets website
   var legend2 = L.control({
@@ -165,7 +175,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     return div;
   };
   // legend2.addTo(earthquakeMap)
-    if( tsunami_sum != 0 ) legend2.addTo(map);
+  if (tsunami_sum != 0) legend2.addTo(earthquakeMap);
 
   // retreive Tectonic Plate geoJSON data.
   d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json",
@@ -249,5 +259,10 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   }
   L.geoJson(statesData, { style: style }).addTo(earthquakeMap);
 
-
-});
+}
+d3.json("/api/map/earthquake", makethemap);
+d3.select("#refresh_button")
+  .on("click", function () {
+    console.log("Refreshing the map")
+    d3.json("/api/map/earthquake/refresh", makethemap)
+  })

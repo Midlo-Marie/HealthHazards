@@ -2,6 +2,7 @@ const scatterUrl = "/api/chart/bubble";
 
 let year = 2014;
 let cause = "All causes"
+
     // Fetch the JSON data and console log it
 d3.json(scatterUrl, function(data) {
     console.log(data);
@@ -9,12 +10,23 @@ d3.json(scatterUrl, function(data) {
         return record.Year === year &&
             record["Cause Name"] === cause
 
-
-
     }).map(function(record) {
+            let bg = "cyan"
+            s=record.State
+            if(s==="Maine"||s==="Rhode Island"||s==="Vermont"||s==="Connecticut"||s==="New Hampshire"||s==="Massachusetts") 
+                {bg="magenta";}
+            else if(s==="New York"||s==="New Jersey"||s==="Pennsylvania") {bg="purple";}
+            else if(s==="West Virginia"||s==="Virginia"||s==="Kentucky"||s==="Delaware"||s==="Maryland"||
+                s==="North Carolina"||s==="South Carolina"||s==="Tennessee"||s==="Arkansas"||s==="Louisiana"||
+                s==="Florida"||s==="Georgia"||s==="Alabama"||s==="Mississippi") {bg="red";}
+            else if(s==="Michigan"||s==="North Dakota"||s==="South Dakota"||s==="Iowa"||s==="Minnesota"||s==="Kansas"||
+                s==="Nebraska"||s==="Ohio"||s==="Indiana"||s==="Illinois"||s==="Wisconsin"||s==="Missouri") {bg="yellow";}
+            else if(s==="Texas"||s==="Arizona"||s==="New Mexico"||s==="Oklahoma") {bg="cyan";}
+            else if(s==="Montana"||s==="Idaho"||s==="Colorado"||s==="Utah"||s==="Wyoming"||s=="Nevada") {bg="blue";}
+            else if(s==="California"||s==="Oregon"||s==="Washington"||s==="Hawaii"||s==="Alaska") {bg="green";}
             return {
                 label: record.State,
-                backgroundColor: "#18FFFF",
+                backgroundColor: bg,
                 borderColor: "#004D40",
                 data: [{
                     x: record.normalized_deaths,
@@ -39,7 +51,7 @@ d3.json(scatterUrl, function(data) {
                     position: 'bottom',
 
                     scaleLabel: {
-                        labelString: 'Normalized Deaths',
+                        labelString: 'Normalized Deaths per 100,000',
                         display: true
                     },
                     gridLines: {
