@@ -1,8 +1,7 @@
-### Project 2 Homework - Story Telling with Data
 
 ### U. Richmond Data Analytics Bootcamp (November, 2019)
 
-> In this assignment, Diana A. and Marie C. use all of the analysis and visualization 
+> In this assignment, Marie C. and Diana A. use all of the analysis and visualization 
 > tools taught thus far to complete a data analytics project and "tell a story"
 > through data.
 
@@ -16,7 +15,7 @@
 
 ### Background
 
-> With our backgrounds in finance and environmental sciences, we apply 
+> With our backgrounds in environmental sciences and finance, we apply 
 > data science techniques to examine social, health, financial, and environmental
 > data mashups. Our objective is to gain new insights by combining data from different
 > disciplines.
